@@ -1,21 +1,21 @@
-# resource "vault_mount" "ssh-client-signer" {
-#     path = "ssh-client-signer"
-#     type = "ssh"
-# }
+resource "vault_mount" "ssh-client-signer" {
+    path = "ssh-client-signer"
+    type = "ssh"
+}
 
-# resource "vault_ssh_secret_backend_role" "boundary-client" {
-#     name                    = "boundary-client"
-#     algorithm_signer        = "rsa-sha2-512"
-#     backend                 = vault_mount.ssh-client-signer.path
-#     key_type                = "ca"
-#     allow_user_certificates = true
-#     default_user            = "ubuntu"
-#     allowed_users           = "*"
-#     default_extensions      = {
-#       "permit-pty": ""
-#     }
-#     allowed_extensions      = "*"
-# }
+resource "vault_ssh_secret_backend_role" "boundary-client" {
+    name                    = "boundary-client"
+    algorithm_signer        = "rsa-sha2-512"
+    backend                 = vault_mount.ssh-client-signer.path
+    key_type                = "ca"
+    allow_user_certificates = true
+    default_user            = "ubuntu"
+    allowed_users           = "*"
+    default_extensions      = {
+      "permit-pty": ""
+    }
+    allowed_extensions      = "*"
+}
 
 resource "vault_ssh_secret_backend_ca" "boundary_ca" {
     backend = vault_mount.ssh-client-signer.path
