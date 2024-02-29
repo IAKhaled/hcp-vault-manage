@@ -22,7 +22,7 @@
 #     generate_signing_key = true
 # }
 
-# data "vault_generic_secret" "boundary_ca_public_key" {
-#   path = "ssh-client-signer/config/ca"
-#   depends_on = [ vault_ssh_secret_backend_ca.boundary_ca ]
-# }
+data "vault_generic_secret" "boundary_ca_public_key" {
+  path = "ssh-client-signer/config/ca"
+  depends_on = [ vault_ssh_secret_backend_ca.boundary_ca ]
+}
